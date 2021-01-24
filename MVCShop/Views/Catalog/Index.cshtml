@@ -1,0 +1,40 @@
+﻿@using MVCControllers.Views.Catalog
+@model CatalogViewModel
+    <div class="container-fluid">
+        <div class="row content">
+
+            <div class="category-menu col-sm-2 sticky-top" style="background-color: burlywood; height: 500px;"></div>
+            <div class="col-sm-10 main-list" style="background-color: #BA5536;">
+
+                <partial name="~/Views/Partial/Catalog/_PagesCount.cshtml" for="PagesCount">
+
+
+                    <div class="col-sm-11 menu_items">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                <div class="d-flex flex-wrap justify-content-center">
+                                    @foreach (var toy in Model.Toys)
+                                    {
+                                        <div class="d-inline-block m-4">
+                                            <div class="card" style="width: 18rem;">
+                                                <img src="~/Images/no-photo.png" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">@toy.Name</h5>
+                                                    <p class="card-text">@toy.Info</p>
+                                                    <p class="card-text">@toy.Price руб.</p>
+                                                    <a href="#" class="btn btn-primary">Купить</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <partial name="~/Views/Partial/Catalog/_PagesCount.cshtml" for="PagesCount">
+            </div>
+        </div>
+    </div>
+</div>
