@@ -1,4 +1,4 @@
-﻿@using MVCControllers.Views.Catalog
+﻿@using MVCShop.Views.Catalog
 @model CatalogViewModel
     <div class="container-fluid">
         <div class="row content">
@@ -23,7 +23,12 @@
                                                     <h5 class="card-title">@toy.Name</h5>
                                                     <p class="card-text">@toy.Info</p>
                                                     <p class="card-text">@toy.Price руб.</p>
-                                                    <a href="#" class="btn btn-primary">Купить</a>
+                                                    <form method="post" asp-action="Buy" asp-controller="Catalog" asp-route-id="@toy.Id">
+                                                        <button class="" type="submit">
+                                                            <a @*asp-action="Buy" asp-controller="Catalog" asp-route-toy="@toy"*@ class="btn btn-primary">Купить</a>
+                                                        </button>
+                                                    </form>
+                                                    
                                                 </div>
                                             </div>
                                         </div>

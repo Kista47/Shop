@@ -1,17 +1,16 @@
-﻿using MVCControllers.Models;
-using MVCControllers.Repositories;
-using MVCControllers.Views.Catalog;
+﻿using MVCShop.Models;
+using MVCShop.Repositories;
+using MVCShop.Views.Catalog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MVCControllers.Services
+namespace MVCShop.Services
 {
     public class CatalogeService
     {
         private readonly ToyRepository _toyRepository;
-
         private const int MaxPages = 9;
 
         public CatalogeService(ToyRepository toyRepository)
@@ -35,5 +34,15 @@ namespace MVCControllers.Services
             var toys = await GetToysList().ConfigureAwait(false);
             return new CatalogViewModel(toys.ToArray(), GetPageCount(toys));
         }
+        public async void Buy(int id)
+        {
+            Toy toy = await GetToy(id).ConfigureAwait(false);
+            BasketOrder.Initialize().AddToy(toy);
+        }
+       public async Task<Toy> GetToy(int id)
+        {
+            return await _toyRepository.GetToy(id).ConfigureAwait(false);
+        }
+
     }
 }

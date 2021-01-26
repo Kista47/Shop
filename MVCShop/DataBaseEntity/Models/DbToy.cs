@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MVCControllers.DataBaseEntity.Models
+namespace MVCShop.DataBaseEntity.Models
 {
     public class DbToy
     {

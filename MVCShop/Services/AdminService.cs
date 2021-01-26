@@ -1,11 +1,11 @@
-﻿using MVCControllers.Models;
-using MVCControllers.Repositories;
+﻿using MVCShop.Models;
+using MVCShop.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MVCControllers.Services
+namespace MVCShop.Services
 {
     public class AdminService
     {

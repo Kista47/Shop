@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MVCControllers.DataBaseEntity.Models;
+using MVCShop.DataBaseEntity.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MVCControllers.DataBaseEntity
+namespace MVCShop.DataBaseEntity
 {
     public class DataBaseContext : DbContext
     {

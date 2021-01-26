@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MVCControllers.DataBaseEntity;
-using MVCControllers.DataBaseEntity.Models;
-using MVCControllers.Models;
+using MVCShop.DataBaseEntity;
+using MVCShop.DataBaseEntity.Models;
+using MVCShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MVCControllers.Repositories
+namespace MVCShop.Repositories
 {
     public class ToyRepository
     {
@@ -47,7 +47,7 @@ namespace MVCControllers.Repositories
             {
                 return new Toy(dbToy.Id, dbToy.Name, dbToy.Info, dbToy.Price);
             }
-            return null;
+            throw new Exception("DbToy = null");
         }
         private async Task<DbToy> GetDbToy(int id)
         {

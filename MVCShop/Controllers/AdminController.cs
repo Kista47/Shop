@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MVCControllers.Models;
-using MVCControllers.Services;
+using MVCShop.Models;
+using MVCShop.Services;
 
-namespace MVCControllers.Controllers
+namespace MVCShop.Controllers
 {
     public class AdminController : Controller
     {
@@ -29,7 +29,6 @@ namespace MVCControllers.Controllers
         [HttpPost]
         public async Task<IActionResult> AddToy(string name, string info, int price)
         {
-            //Toy toy = new Toy(500,"Toy1","adggggggggg");new Toy(name,info,price)
             await _admin.CreateToy(new Toy(name, info, price)).ConfigureAwait(false);
             return RedirectToRoute(new { controller = "Catalog", action = "Index" });
         }
