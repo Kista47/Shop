@@ -9,20 +9,10 @@ namespace MVCShop.Models
     public class BasketOrder
     {
         private ICollection<Toy> toys { get;}
-        private static BasketOrder _order;
 
-        protected BasketOrder()
+        public BasketOrder()
         {
             toys = new LinkedList<Toy>();
-        }
-
-        public static BasketOrder Initialize()
-        {
-            if (_order == null)
-            {
-                _order = new BasketOrder();
-            }
-            return _order;
         }
 
         public void AddToy(Toy toy)
@@ -51,7 +41,5 @@ namespace MVCShop.Models
         {
             return toys;
         }
-       
-
     }
 }

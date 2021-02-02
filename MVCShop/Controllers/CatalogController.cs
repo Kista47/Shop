@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MVCShop.Models;
 using MVCShop.Services;
+using Newtonsoft.Json;
 
 namespace MVCShop.Controllers
 {
@@ -31,7 +32,11 @@ namespace MVCShop.Controllers
         [HttpPost]
         public async Task<IActionResult> Buy(int id)
         {
-            _catalogeService.Buy(id);
+            _catalogeService.Buy(this.HttpContext,id);
+           
+            //Response.Cookies.Append("BasketToy",JsonConvert.SerializeObject())
+
+
             return RedirectToRoute(new {controller = "Catalog", action = "Index" });
         }
     }

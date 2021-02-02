@@ -4,7 +4,7 @@
 @{
 }
 @using MVCShop.Models
-@model BasketOrder
+@model ICollection<Toy>
 <div class="container slider">
     <div class="col">
         <table class="basket-tab">
@@ -15,9 +15,9 @@
                 <th>Цена</th>
                 <th>Удалить все</th>
             </tr>
-            @if (Model.GetToys() != null)
+            @if (Model?.Any() == true)
             {
-                @foreach (Toy toy in Model.GetToys())
+                @foreach (Toy toy in Model)
                 {
                     <tr>
                         <th>Фото</th>

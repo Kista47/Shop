@@ -16,9 +16,9 @@ namespace MVCShop.Controllers
         {
             _basketService = basketService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_basketService.GetOrder());
+            return View(await _basketService.GetToys(this.HttpContext));
         }
         [HttpGet]
         public int Price()
@@ -30,7 +30,15 @@ namespace MVCShop.Controllers
         {
             _basketService.RemoveToy(toy);
         }
+        [HttpPost]
+        public void DeleteAll()
+        {
 
+        }
+        public void Delete(int id)
+        {
+
+        }
 
     }
 }

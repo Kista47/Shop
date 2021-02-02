@@ -70,6 +70,7 @@ ul .page-item {
     background-color: white;
     margin-top: 50px;
     border: 10px groove grey;
+    text-align: center;
 }
 
 .basket-tab tr {
