@@ -18,13 +18,13 @@ namespace MVCShop.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View(await _basketService.GetToys(this.HttpContext));
+            return View(await _basketService.GetBasketViewModel(HttpContext));
         }
-        [HttpGet]
-        public int Price()
-        {
-            return _basketService.Price();
-        }
+        //[HttpGet]
+        //public int Price()
+        //{
+        //    return _basketService.Price();
+        //}
         [HttpPost]
         public void RemoveToy(Toy toy)
         {
@@ -33,12 +33,16 @@ namespace MVCShop.Controllers
         [HttpPost]
         public void DeleteAll()
         {
-
+            _basketService.DeleteAll(this.HttpContext);
         }
         public void Delete(int id)
         {
-
+            _basketService.Delete(this.HttpContext, id);
         }
-
+        //ublic async Task<ICollection<Toy>> GetToys()
+        //{p
+        //    return await _basketService.GetToys(HttpContext);
+        //}
+        //public async Task<BaskView>
     }
 }

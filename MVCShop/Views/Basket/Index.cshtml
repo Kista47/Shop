@@ -3,8 +3,8 @@
 *@
 @{
 }
-@using MVCShop.Models
-@model ICollection<Toy>
+@using MVCShop.Views.Basket
+@model BasketViewModel
 <div class="container slider">
     <div class="col">
         <table class="basket-tab">
@@ -15,9 +15,9 @@
                 <th>Цена</th>
                 <th>Удалить все</th>
             </tr>
-            @if (Model?.Any() == true)
+            @if (Model.toys?.Any() == true)
             {
-                @foreach (Toy toy in Model)
+                @foreach (Toy toy in Model.toys)
                 {
                     <tr>
                         <th>Фото</th>
@@ -32,7 +32,7 @@
                 <th></th>
                 <th></th>
                 <th></th>
-                <th>Общая стоимость:</th>
+                <th>Общая стоимость:@Model.Price</th>
                 <th>Удалить все</th>
             </tr>
         </table>

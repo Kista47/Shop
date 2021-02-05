@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using MVCShop.Models;
 using MVCShop.Repositories;
+using MVCShop.Views.Basket;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,9 @@ namespace MVCShop.Services
             _order = new BasketOrder();
             _toyRepository = toyRepository;
         }
-        public int Price()
+        public int GetPrice()
         {
-           return _order.GetPrice();
+            return _order.GetPrice();
         }
 
         public BasketOrder GetOrder()
@@ -33,19 +34,34 @@ namespace MVCShop.Services
         }
         public async Task<ICollection<Toy>> GetToys(HttpContext context)
         {
-            var toysIds = JsonConvert.DeserializeObject<ICollection<int>>(context.Request.Cookies[CatalogeService.BASKET_COOK]);
             List<Toy> toys = new List<Toy>();
-            foreach(int toyId in toysIds)
+            if (context.Request.Cookies.ContainsKey(CatalogeService.BASKET_COOK))
             {
-                Toy toy = await _toyRepository.GetToy(toyId);
-                toys.Add(toy);
+                var toysIds = JsonConvert.DeserializeObject<ICollection<int>>(context.Request.Cookies[CatalogeService.BASKET_COOK]);
+
+                foreach (int toyId in toysIds)
+                {
+                    Toy toy = await _toyRepository.GetToy(toyId);
+                    toys.Add(toy);
+                }
             }
             return toys;
         }
-        public void Delete(HttpContext context,int id)
+        public void Delete(HttpContext context, int id)
         {
-            
+            var toys = JsonConvert.DeserializeObject<ICollection<int>>(context.Request.Cookies[CatalogeService.BASKET_COOK]);
+            toys.Remove(id);
+            context.Response.Cookies.Delete(CatalogeService.BASKET_COOK);
+            context.Response.Cookies.Append(CatalogeService.BASKET_COOK, JsonConvert.SerializeObject(toys));
         }
-
+        public async Task<BasketViewModel> GetBasketViewModel(HttpContext context)
+        {
+            var toys = await GetToys(context);
+            return new BasketViewModel(toys.ToArray(), GetPrice());
+        }
+        public void DeleteAll(HttpContext context)
+        {
+            context.Response.Cookies.Delete(CatalogeService.BASKET_COOK);
+        }
     }
 }
