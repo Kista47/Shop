@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\css\site.css" />
-    <Content Remove="wwwroot\css\style.css" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,7 +17,6 @@
     <None Include="Views\_ViewImports.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
     <None Include="wwwroot\css\site.css" />
-    <None Include="wwwroot\css\style.css" />
     <None Include="wwwroot\Images\Catalog-icon.png" />
     <None Include="wwwroot\Images\Constructor-icon.png" />
     <None Include="wwwroot\Images\no-photo.png" />

@@ -22,6 +22,12 @@ namespace MVCShop.Controllers
         {
             return  View(await _catalogeService.GetCatalogeViewModel().ConfigureAwait(false));
         }
+        public async Task<IActionResult> ToyPage(int id)
+        {
+            var toy = await _catalogeService.GetToy(id).ConfigureAwait(false);
+            if (toy != null) return View(toy);
+            return NotFound();
+        }
 
         [HttpGet]
         public IActionResult Buy()

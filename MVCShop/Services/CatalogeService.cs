@@ -15,7 +15,7 @@ namespace MVCShop.Services
     {
         private readonly ToyRepository _toyRepository;
         private BasketService _Bservice;
-        private const int MaxPages = 9;
+        private const int MAXTOYSPAGE = 12;
         public const string BASKET_COOK = "BasketCook";
 
         public CatalogeService(ToyRepository toyRepository, BasketService Bservice)
@@ -31,7 +31,7 @@ namespace MVCShop.Services
 
         public int GetPageCount(ICollection<Toy> toys)
         {
-            int count = (int)Math.Ceiling((decimal)toys.Count / MaxPages);
+            int count = (int)Math.Ceiling((decimal)toys.Count / MAXTOYSPAGE);
 
             return count;
         }
@@ -54,12 +54,28 @@ namespace MVCShop.Services
             {
                 context.Response.Cookies.Append(BASKET_COOK, JsonConvert.SerializeObject(new[] { id }));
             }
-           // Toy toy = await GetToy(id).ConfigureAwait(false);
-            //_Bservice.GetOrder().AddToy(toy);
         }
         public async Task<Toy> GetToy(int id)
         {
             return await _toyRepository.GetToy(id).ConfigureAwait(false);
+        }
+
+        public async Task<List<Toy>> GetPageToys(int pageNumber)
+        {
+            var allToys = await GetToysList().ConfigureAwait(false);
+            List<Toy> toys = new List<Toy>();
+
+            for (int i = pageNumber * 12; i < GetCount(pageNumber, allToys); i++)
+            {
+                toys.AddRange(allToys.ToList<Toy>().GetRange(i, GetCount(pageNumber, allToys)));
+            }
+            return toys;
+        }
+
+        public int GetCount(int pageNumber, ICollection<Toy> allToys)
+        {
+            int count = allToys.Count - pageNumber * MAXTOYSPAGE;
+            return  MAXTOYSPAGE >= count ? count : MAXTOYSPAGE;
         }
 
     }

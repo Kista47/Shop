@@ -23,6 +23,7 @@ a {
     margin-top: 30px;
     margin-bottom: 35px;
     padding-top: 30px;
+    border: 40px ridge #611;
 }
 
 .card {
@@ -75,4 +76,24 @@ ul .page-item {
 
 .basket-tab tr {
     border: 1px solid black;
+}
+
+.stiky-bottom {
+    position: sticky;
+    bottom: 0px;
+    z-index: 1020;
+}
+.toy-page{
+    text-align: center;
+    border-radius: 50px;
+    background-color: azure;
+    max-width: 100%;
+    margin-top: 25px;
+}
+.toy-page-right {
+   background-color: darkgrey;
+   border-left: medium solid black;
+}
+.toy-page-left {
+    background-color: #cfe7ff;
 }

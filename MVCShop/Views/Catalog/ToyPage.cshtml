@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Toy
+<div class="container-fluid">
+
+    <div class="container toy-page">
+        <div class="row p-4 h-100">
+            <div class="col-lg-8 toy-page-left">
+                <img class="w-100 h-100" src="~/Images/FirstSlide.jpg">
+            </div>
+
+            <div class="col-lg-4 toy-page-right">
+                @*<div class="container">*@
+                <div class="p-2 h-75">
+
+                    <div class="col mb-5">
+                        <h5 class="card-title">Название игрушки:@Model.Name</h5>
+                    </div>
+
+                    <div class="col mb-5">
+                        Tags:
+                    </div>
+
+                    <div class="col mb-5">
+                        <p class="card-text">Информация:@Model.Info</p>
+                    </div>
+
+                    <div class="col mb-1">
+                        <p class="card-text" style="bottom:0px;">Цена:@Model.Price руб.</p>
+                    </div>
+
+                    <div class="col">
+                        <form method="post" asp-action="Buy" asp-controller="Catalog" asp-route-id="@Model.Id" style="padding:8px;">
+                            <button class="btn btn-success w-75" type="submit">
+                                Купить
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
