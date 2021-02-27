@@ -19,7 +19,7 @@
     <None Include="wwwroot\css\site.css" />
     <None Include="wwwroot\Images\Catalog-icon.png" />
     <None Include="wwwroot\Images\Constructor-icon.png" />
-    <None Include="wwwroot\Images\no-photo.png" />
+    <None Include="wwwroot\Images\NonPhoto.png" />
     <None Include="wwwroot\Images\Slide1.jpg" />
     <None Include="wwwroot\Images\Slide2.jpg" />
   </ItemGroup>

@@ -3,7 +3,6 @@
 <div class="container-fluid">
     <div class="row content">
 
-        @* <div class="category-menu col-sm-2 sticky-top" style="background-color: burlywood; height: 500px;"></div>*@
         <div class="col-sm-12 main-list" style="background-color: #BA5536;">
 
             <partial name="~/Views/Partial/Catalog/_PagesCount.cshtml" for="PagesCount" />
@@ -16,7 +15,7 @@
                         {
                             <div class="d-inline-block m-3 text-center">
                                 <div class="card" style="width: 18rem;">
-                                    <img src="~/Images/no-photo.png" class="card-img-top" alt="...">
+                                    <img src="~/Images/NonPhoto.png" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title">@toy.Name</h5>
                                         <p class="card-text">@toy.Info</p>
@@ -39,8 +38,6 @@
                             </div>
                         }
                     </div>
-                    @*</div>*@
-                    @*</div>*@
                 </div>
 
                 <partial name="~/Views/Partial/Catalog/_PagesCount.cshtml" for="PagesCount" />
