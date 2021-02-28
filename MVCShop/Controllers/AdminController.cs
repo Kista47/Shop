@@ -23,7 +23,7 @@ namespace MVCShop.Controllers
         }
         public IActionResult Add()
         {
-            return View();
+            return View(new Toy());
         }
 
         [HttpPost]

@@ -3,16 +3,24 @@
 *@
 @{
 }
+@model Toy
 <div class="container">
     <div class="row">
-        <form method="post" action="~/Admin/AddToy">
-            <label>Имя игрушки:</label><br />
-            <input type="text" name="name" /><br />
-            <label>Информация:</label><br />
-            <input type="text" name="info" /><br />
-            <label>Информация:</label><br />
-            <input type="number" name="price" /><br />
-            <input type="submit" value="Отправить" />
-        </form>
+        <div class="container bg-light">
+            <div class="form-group">
+                <form method="post" action="~/Admin/AddToy">
+                    <label>Имя игрушки:</label><br />
+                    <input asp-for="@Model.Name" type="text" class="form-control" />
+                    <span asp-validation-for="@Model.Name" class="text-danger"></span><br />
+                    <label>Информация:</label><br />
+                    <input asp-for="@Model.Info" type="text" class="form-control"/>
+                    <span asp-validation-for="@Model.Info" class="text-danger"></span><br />
+                    <label>Цена:</label><br />
+                    <input asp-for="@Model.Price" type="number" class="form-control" />
+                    <span asp-validation-for="@Model.Price" class="text-danger"></span><br />
+                    <input type="submit" value="Отправить" />
+                </form>
+            </div>
+        </div>
     </div>
 </div>

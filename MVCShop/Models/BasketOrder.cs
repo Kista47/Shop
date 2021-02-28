@@ -20,18 +20,6 @@ namespace MVCShop.Models
             toys.Add(toy);
         }
 
-        public int GetPrice()
-        {
-            int price = 0;
-            if (toys.Count != 0)
-            {
-                foreach (Toy toy in toys)
-                {
-                    price += toy.Price;
-                }
-            }
-            return price;
-        }
         public void RemoveToy(Toy toy)
         {
             toys.Remove(toy);

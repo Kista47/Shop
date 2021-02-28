@@ -23,11 +23,7 @@ namespace MVCShop.Services
             _order = new BasketOrder();
             _toyRepository = toyRepository;
         }
-        public int GetPrice()
-        {
-            return _order.GetPrice();
-        }
-
+   
         public BasketOrder GetOrder()
         {
             return _order;
@@ -57,7 +53,7 @@ namespace MVCShop.Services
         public async Task<BasketViewModel> GetBasketViewModel(HttpContext context)
         {
             var toys = await GetToys(context);
-            return new BasketViewModel(toys.ToArray(), GetPrice());
+            return new BasketViewModel(toys.ToArray());
         }
         public void DeleteAll(HttpContext context)
         {

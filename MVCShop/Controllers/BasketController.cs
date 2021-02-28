@@ -20,29 +20,22 @@ namespace MVCShop.Controllers
         {
             return View(await _basketService.GetBasketViewModel(HttpContext));
         }
-        //[HttpGet]
-        //public int Price()
-        //{
-        //    return _basketService.Price();
-        //}
+        
         [HttpPost]
         public void RemoveToy(Toy toy)
         {
             _basketService.RemoveToy(toy);
         }
-        [HttpPost]
-        public void DeleteAll()
+        
+        public async Task<ActionResult> DeleteAll()
         {
             _basketService.DeleteAll(this.HttpContext);
+            return RedirectToRoute(new { controller = "Basket", action = "Index" });
         }
-        public void Delete(int id)
+        public async Task<ActionResult> DeleteToy(int id)
         {
             _basketService.Delete(this.HttpContext, id);
+            return RedirectToRoute(new { controller = "Basket", action = "Index" });
         }
-        //ublic async Task<ICollection<Toy>> GetToys()
-        //{p
-        //    return await _basketService.GetToys(HttpContext);
-        //}
-        //public async Task<BaskView>
     }
 }

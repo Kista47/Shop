@@ -1,13 +1,6 @@
 body {
     min-width: 320px;
     background-color: #973010;
-    /*#BA5536*/
-}
-
-a {
-    font-family: fantasy;
-    font-size: 22px;
-    color: crimson;
 }
 
 .main-list {
@@ -30,13 +23,15 @@ a {
     margin-bottom: 30px;
 }
 
-    .card img {
-        width: auto;
-        height: auto;
-    }
+.card img {
+    width: auto;
+    height: auto;
+}
 
-ul .page-item {
-    background-color: brown;
+.nav-li {
+    text-align: center;
+    margin: 20px 0.5% 20px 0.5%;
+    font-size: 26px;
 }
 
 .category-menu {
@@ -74,26 +69,33 @@ ul .page-item {
     text-align: center;
 }
 
-.basket-tab tr {
-    border: 1px solid black;
-}
+    .basket-tab tr {
+        border: 1px solid black;
+    }
 
 .stiky-bottom {
     position: sticky;
     bottom: 0px;
     z-index: 1020;
 }
-.toy-page{
+
+.toy-page {
     text-align: center;
     border-radius: 50px;
     background-color: azure;
     max-width: 100%;
     margin-top: 25px;
 }
+
 .toy-page-right {
-   background-color: darkgrey;
-   border-left: medium solid black;
+    background-color: darkgrey;
+    border-left: medium solid black;
 }
+
 .toy-page-left {
     background-color: #cfe7ff;
+}
+.social-icon{
+    width: 40px;
+    height: 40px;
 }

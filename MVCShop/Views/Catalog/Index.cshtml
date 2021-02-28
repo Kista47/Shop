@@ -22,13 +22,13 @@
                                         <p class="card-text">@toy.Price руб.</p>
 
                                         <form asp-action="ToyPage" asp-controller="Catalog" asp-route-id="@toy.Id">
-                                            <button  class="btn btn-primary w-75" type="submit">
+                                            <button  class="btn btn-primary w-100" type="submit">
                                                 Подробнее
                                             </button>
                                         </form>
 
-                                        <form method="post" asp-action="Buy" asp-controller="Catalog" asp-route-id="@toy.Id" style="padding:8px;">
-                                            <button class="btn btn-success w-75" type="submit">
+                                        <form method="post" asp-action="Buy" asp-controller="Catalog" asp-route-id="@toy.Id">
+                                            <button class="mt-2 btn btn-success w-100" type="submit">
                                                 Купить
                                             </button>
                                         </form>

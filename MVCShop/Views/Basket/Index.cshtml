@@ -13,18 +13,27 @@
                 <th>Название</th>
                 <th>Описание</th>
                 <th>Цена</th>
-                <th>Удалить все</th>
+                <th>
+                    <a asp-action="DeleteAll" asp-controller="Basket" class="btn btn-primary w-100 bg-danger">Удалить Всё</a>
+                </th>
             </tr>
             @if (Model.toys?.Any() == true)
             {
                 @foreach (Toy toy in Model.toys)
                 {
                     <tr>
-                        <th>Фото</th>
+                        <th><img height="200" src="~/Images/NonPhoto.png" class="w-75" alt="..."></th>
                         <th>@toy.Name</th>
                         <th>@toy.Info</th>
                         <th>@toy.Price</th>
-                        <th>Кнопка удалить </th>
+                        <th>
+                            <form asp-action="ToyPage" asp-controller="Catalog" asp-route-id="@toy.Id">
+                                <button class="btn btn-primary w-100" type="submit">
+                                    Подробнее
+                                </button>
+                            </form>
+                            <a asp-action="DeleteToy" asp-controller="Basket" asp-route-id="@toy.Id" class="btn btn-primary w-100 bg-danger">Удалить</a>
+                        </th>
                     </tr>
                 }
             }
@@ -33,7 +42,9 @@
                 <th></th>
                 <th></th>
                 <th>Общая стоимость:@Model.Price</th>
-                <th>Удалить все</th>
+                <th>
+                    <a asp-action="Buy" asp-controller="Basket" class="btn btn-primary w-100 bg-success">Купить</a>
+                </th>
             </tr>
         </table>
 

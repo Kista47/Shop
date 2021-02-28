@@ -11,10 +11,23 @@ namespace MVCShop.Views.Basket
         public ICollection<Toy> toys { get; set; }
         public int Price { get; set; }
 
-        public BasketViewModel(ICollection<Toy> toys, int price)
+        public BasketViewModel(ICollection<Toy> toys)
         {
             this.toys = toys;
-            Price = price;
+            Price = GetPrice();
         }
+        public int GetPrice()
+        {
+            int price = 0;
+            if (toys.Count != 0)
+            {
+                foreach (Toy toy in toys)
+                {
+                    price += toy.Price;
+                }
+            }
+            return price;
+        }
+
     }
 }
