@@ -69,9 +69,9 @@ body {
     text-align: center;
 }
 
-    .basket-tab tr {
-        border: 1px solid black;
-    }
+.basket-tab tr {
+    border: 1px solid black;
+}
 
 .stiky-bottom {
     position: sticky;
@@ -95,7 +95,17 @@ body {
 .toy-page-left {
     background-color: #cfe7ff;
 }
+.social-frag {
+    font-size: 30px;
+}
 .social-icon{
-    width: 40px;
-    height: 40px;
+    font-size: 35px;
+}
+.home-post {
+    border: 20px inset #611;
+    width: 100%;
+}
+.back-img{
+    background-size: 100% 100%;
+    background-image: url(../Images/Slide2.jpg);
 }

@@ -4,18 +4,30 @@
 @{
 }
 @model Toy
-<div class="d-inline-block m-4">
-    <div class="card" style="width: 18rem;">
-        <img src="~/Images/no-photo.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <form action="~/Admin/UpdateToy" method="post">
-                <input type="hidden" asp-for="@Model.Id" />
-                <p class="card-text"><input asp-for="@Model.Name" /></p>
-                <p class="card-text"><input asp-for="@Model.Info" /></p>
-                <p class="card-text"><input asp-for="@Model.Price" /> руб.</p>
-                <button type="submit">Сохранить изменения</button>
-                <a asp-action="Update" asp-controller="Admin" class="btn btn-primary bg-danger">Отмена</a>
-            </form>
+    <div class="container text-center">
+        <div class="d-inline-block m-4">
+
+            <div class="card" style="width: 18rem;">
+                <img src="~/Images/no-photo.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <form action="~/Admin/UpdateToy" method="post">
+                        <input type="hidden" asp-for="@Model.Id" />
+                        <p>
+                            <input asp-for="@Model.Name" class="form-control"/>
+                            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <input asp-for="@Model.Info" class="form-control" />
+                            <span asp-validation-for="@Model.Info" class="text-danger"></span><br />
+                        </p>
+                        <p>
+                            <input asp-for="@Model.Price" class="form-control" /> руб.
+                            <span asp-validation-for="@Model.Price" class="text-danger"></span><br />
+                        </p>
+                        <p><button type="submit">Сохранить изменения</button></p>
+                        <a asp-action="Update" asp-controller="Admin" class="btn btn-primary bg-danger">Отмена</a>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</div>
