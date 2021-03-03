@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MVCShop.Filters;
 using MVCShop.Models;
 using MVCShop.Services;
 using Newtonsoft.Json;
@@ -18,10 +19,19 @@ namespace MVCShop.Controllers
             _catalogeService = catalogeService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(SearchFilter searchFilter, int id)
         {
-            return  View(await _catalogeService.GetCatalogeViewModel().ConfigureAwait(false));
+            return  View(await _catalogeService.GetSearchCatalogeViewModel(searchFilter,id).ConfigureAwait(false));
         }
+        //public async Task<IActionResult> Index(IActionResult action)
+        //{
+        //    return View(action);
+        //}
+
+        //public async Task<IActionResult> Page(int id)
+        //{
+        //    return View(await _catalogeService.GetCatalogeViewModel(id).ConfigureAwait(false));
+        //}
         public async Task<IActionResult> ToyPage(int id)
         {
             var toy = await _catalogeService.GetToy(id).ConfigureAwait(false);
@@ -29,21 +39,23 @@ namespace MVCShop.Controllers
             return NotFound();
         }
 
-        [HttpGet]
-        public IActionResult Buy()
-        {
-            return RedirectToRoute(new { controller = "Catalog", action = "Index" });
-        }
+        //[HttpGet]
+        //public IActionResult Buy()
+        //{
+        //    return RedirectToRoute(new { controller = "Catalog", action = "Index" });
+        //}
 
         [HttpPost]
         public async Task<IActionResult> Buy(int id)
         {
             _catalogeService.Buy(this.HttpContext,id);
-           
-            //Response.Cookies.Append("BasketToy",JsonConvert.SerializeObject())
-
-
             return RedirectToRoute(new {controller = "Catalog", action = "Index" });
         }
+        //[HttpPost]
+        //public async Task<IActionResult> Search(string keyWords)
+        //{
+        //    return RedirectToAction("Index","Catalog",await _catalogeService.GetSearchCatalogeViewModel(keyWords, 0));
+        //}
+
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVCShop.DataBaseEntity;
 using MVCShop.DataBaseEntity.Models;
+using MVCShop.Filters;
 using MVCShop.Models;
+using MVCShop.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +23,45 @@ namespace MVCShop.Repositories
             await _db.AddAsync(TransformToy(toy)).ConfigureAwait(false);
             await _db.SaveChangesAsync().ConfigureAwait(false);
         }
+        //public async Task<ICollection<Toy>> GetToys(int pageIndex)
+        //{
+        //    var dbToys = await _db.DbToys.Skip(pageIndex * CatalogeService.MAXTOYSPAGE)
+        //                                 .Take(CatalogeService.MAXTOYSPAGE)
+        //                                 .OrderBy(dbToy => dbToy.Name)
+        //                                 .ToArrayAsync()
+        //                                 .ConfigureAwait(false);
+
+        //    return dbToys.Select(dbToy =>
+        //    {
+        //        return new Toy(dbToy.Id, dbToy.Name, dbToy.Info, dbToy.Price);
+        //    }).ToArray();
+        //}
+
         public async Task<ICollection<Toy>> GetToys()
         {
-            var dbToys = await _db.DbToys.ToArrayAsync().ConfigureAwait(false);
+            var dbToys = await _db.DbToys.OrderBy(dbToy => dbToy.Name)
+                                         .ToArrayAsync()
+                                         .ConfigureAwait(false);
             return dbToys.Select(dbToy =>
+            {
+                return new Toy(dbToy.Id, dbToy.Name, dbToy.Info, dbToy.Price);
+            }).ToArray();
+        }
+
+        public async Task<ICollection<Toy>> SearchToys(SearchFilter searchFilter, int pageIndex)
+        {
+            IQueryable<DbToy> dbToys = _db.DbToys;
+            if (searchFilter != null)
+            {
+                if (!String.IsNullOrEmpty(searchFilter.keyWords))
+                    dbToys = dbToys.Where(dbToy => dbToy.Name.Contains(searchFilter.keyWords));
+                                                     
+            }
+            dbToys = dbToys.Skip(pageIndex * CatalogeService.MAXTOYSPAGE)
+                           .Take(CatalogeService.MAXTOYSPAGE)
+                           .OrderBy(dbToy => dbToy.Name);
+
+            return (await dbToys.ToArrayAsync()).Select(dbToy =>
             {
                 return new Toy(dbToy.Id, dbToy.Name, dbToy.Info, dbToy.Price);
             }).ToArray();

@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Http;
+using MVCShop.Filters;
 using MVCShop.Models;
 using MVCShop.Repositories;
 using MVCShop.Views.Catalog;
@@ -15,7 +16,7 @@ namespace MVCShop.Services
     {
         private readonly ToyRepository _toyRepository;
         private BasketService _Bservice;
-        private const int MAXTOYSPAGE = 12;
+        public const int MAXTOYSPAGE = 6;
         public const string BASKET_COOK = "BasketCook";
 
         public CatalogeService(ToyRepository toyRepository, BasketService Bservice)
@@ -35,11 +36,11 @@ namespace MVCShop.Services
 
             return count;
         }
-        public async Task<CatalogViewModel> GetCatalogeViewModel()
-        {
-            var toys = await GetToysList().ConfigureAwait(false);
-            return new CatalogViewModel(toys.ToArray(), GetPageCount(toys));
-        }
+        //public async Task<CatalogViewModel> GetCatalogeViewModel(SearchFilter searchFilter,int pageIndex)
+        //{
+        //    var toys = await GetToysList(pageIndex).ConfigureAwait(false);
+        //    return new CatalogViewModel(toys.ToArray(), GetPageCount(await _toyRepository.SearchToys(searchFilter)));
+        //}
         public async void Buy(HttpContext context, int id)
         {
 
@@ -60,23 +61,10 @@ namespace MVCShop.Services
             return await _toyRepository.GetToy(id).ConfigureAwait(false);
         }
 
-        public async Task<List<Toy>> GetPageToys(int pageNumber)
+        public async Task<CatalogViewModel> GetSearchCatalogeViewModel(SearchFilter searchFilter,int pageIndex)
         {
-            var allToys = await GetToysList().ConfigureAwait(false);
-            List<Toy> toys = new List<Toy>();
-
-            for (int i = pageNumber * 12; i < GetCount(pageNumber, allToys); i++)
-            {
-                toys.AddRange(allToys.ToList<Toy>().GetRange(i, GetCount(pageNumber, allToys)));
-            }
-            return toys;
+            var toys = await _toyRepository.SearchToys(searchFilter, pageIndex).ConfigureAwait(false);
+            return new CatalogViewModel(toys.ToArray(), GetPageCount(await _toyRepository.SearchToys(searchFilter, pageIndex)));
         }
-
-        public int GetCount(int pageNumber, ICollection<Toy> allToys)
-        {
-            int count = allToys.Count - pageNumber * MAXTOYSPAGE;
-            return  MAXTOYSPAGE >= count ? count : MAXTOYSPAGE;
-        }
-
     }
 }
