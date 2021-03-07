@@ -21,7 +21,7 @@ namespace MVCShop.Controllers
 
         public async Task<IActionResult> Index(SearchFilter searchFilter, int id)
         {
-            return  View(await _catalogeService.GetSearchCatalogeViewModel(searchFilter,id).ConfigureAwait(false));
+            return  View(await _catalogeService.GetSearchCatalogeViewModel(searchFilter,id,this.HttpContext).ConfigureAwait(false));
         }
         //public async Task<IActionResult> Index(IActionResult action)
         //{
@@ -39,23 +39,11 @@ namespace MVCShop.Controllers
             return NotFound();
         }
 
-        //[HttpGet]
-        //public IActionResult Buy()
-        //{
-        //    return RedirectToRoute(new { controller = "Catalog", action = "Index" });
-        //}
-
         [HttpPost]
-        public async Task<IActionResult> Buy(int id)
+        public async Task Buy(string id)
         {
-            _catalogeService.Buy(this.HttpContext,id);
-            return RedirectToRoute(new {controller = "Catalog", action = "Index" });
+            _catalogeService.Buy(this.HttpContext,Int32.Parse(id));
+            //return RedirectToRoute(new {controller = "Catalog", action = "Index" });
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Search(string keyWords)
-        //{
-        //    return RedirectToAction("Index","Catalog",await _catalogeService.GetSearchCatalogeViewModel(keyWords, 0));
-        //}
-
     }
 }

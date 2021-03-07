@@ -1,6 +1,8 @@
 body {
     min-width: 320px;
-    background-color: #973010;
+    background-image: url(../Images/back1.jpg);
+   /* background-repeat: no-repeat;*/
+    background-size: 100% 100%;
 }
 
 .main-list {
@@ -108,4 +110,17 @@ body {
 .back-img{
     background-size: 100% 100%;
     background-image: url(../Images/Slide2.jpg);
+}
+.alert {
+    border-left: 5px solid green;
+    position: sticky;
+    left: 77%;
+    bottom: 20px;
+}
+.alert.hide{
+    display: none;
+}
+.close-btn{
+    color : green;
+    cursor : pointer;
 }

@@ -23,7 +23,6 @@ namespace MVCShop.Services
             _order = new BasketOrder();
             _toyRepository = toyRepository;
         }
-   
         public BasketOrder GetOrder()
         {
             return _order;
@@ -49,6 +48,8 @@ namespace MVCShop.Services
             toys.Remove(id);
             context.Response.Cookies.Delete(CatalogeService.BASKET_COOK);
             context.Response.Cookies.Append(CatalogeService.BASKET_COOK, JsonConvert.SerializeObject(toys));
+
+            context.Response.Cookies.Append(CatalogeService.COUNT_BUYS, (Int32.Parse(context.Request.Cookies[CatalogeService.COUNT_BUYS]) - 1).ToString());
         }
         public async Task<BasketViewModel> GetBasketViewModel(HttpContext context)
         {
@@ -58,6 +59,13 @@ namespace MVCShop.Services
         public void DeleteAll(HttpContext context)
         {
             context.Response.Cookies.Delete(CatalogeService.BASKET_COOK);
+            context.Response.Cookies.Delete(CatalogeService.COUNT_BUYS);
         }
+
+        public static string GetBuysCount(HttpContext context)
+        {
+            return String.IsNullOrEmpty(context.Request.Cookies[CatalogeService.COUNT_BUYS]) ? "0" : context.Request.Cookies[CatalogeService.COUNT_BUYS];
+        }
+
     }
 }

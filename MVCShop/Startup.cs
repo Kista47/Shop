@@ -44,8 +44,9 @@ namespace MVCShop
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Catalog}/{action=Index}");
+                    pattern: "{controller=Home}/{action=Index}");
             });
+            
 
         }
     }

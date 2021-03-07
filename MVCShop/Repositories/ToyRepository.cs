@@ -14,6 +14,7 @@ namespace MVCShop.Repositories
     public class ToyRepository
     {
         private readonly DataBaseContext _db;
+        public int countToys { get; private set; } 
         public ToyRepository(DataBaseContext db)
         {
             _db = db;
@@ -51,12 +52,14 @@ namespace MVCShop.Repositories
         public async Task<ICollection<Toy>> SearchToys(SearchFilter searchFilter, int pageIndex)
         {
             IQueryable<DbToy> dbToys = _db.DbToys;
+
             if (searchFilter != null)
             {
                 if (!String.IsNullOrEmpty(searchFilter.keyWords))
                     dbToys = dbToys.Where(dbToy => dbToy.Name.Contains(searchFilter.keyWords));
-                                                     
             }
+            countToys = dbToys.Count();
+
             dbToys = dbToys.Skip(pageIndex * CatalogeService.MAXTOYSPAGE)
                            .Take(CatalogeService.MAXTOYSPAGE)
                            .OrderBy(dbToy => dbToy.Name);
